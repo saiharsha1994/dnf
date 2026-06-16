@@ -1143,6 +1143,29 @@ configuration.
     already imported for package signature verification and this option is turned on, it may be needed
     to import it again for the repository.
 
+.. _repo_gpgcheck_auto_import_keys-label:
+
+``repo_gpgcheck_auto_import_keys``
+    :ref:`boolean <boolean-label>`
+
+    Whether to automatically import the metadata signing key configured via :ref:`gpgkey
+    <repo_gpgkey-label>` into the repository's metadata keyring, instead of asking for
+    interactive confirmation. Only applies when :ref:`repo_gpgcheck <repo_gpgcheck-label>`
+    is enabled. The default is False.
+
+    The keys used to verify repository metadata are stored in a separate keyring for each
+    repository, and that keyring is bound to the repository's resolved URL. As a result the
+    interactive ``Is this ok [y/N]:`` prompt to import the metadata key reappears whenever the
+    repository serves content at a new URL (for example after a ``$releasever`` change), and in
+    unattended runs the prompt defaults to No and the repository is dropped. Enabling this option
+    trusts the key configured in ``gpgkey`` directly from the repository configuration, so the
+    metadata key import succeeds without a prompt. This is the same behavior the dnf Python API uses
+    by default.
+
+    The imported key is logged so the import is not silent. Only enable this for repositories whose
+    ``gpgkey`` you control and trust, and that are retrieved over a trusted channel, because doing so
+    removes the manual confirmation step for that repository's metadata key.
+
 .. _retries-label:
 
 ``retries``
