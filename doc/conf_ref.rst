@@ -1162,9 +1162,11 @@ configuration.
     metadata key import succeeds without a prompt. This is the same behavior the dnf Python API uses
     by default.
 
-    The imported key is logged so the import is not silent. Only enable this for repositories whose
-    ``gpgkey`` you control and trust, and that are retrieved over a trusted channel, because doing so
-    removes the manual confirmation step for that repository's metadata key.
+    The imported key is logged so the import is not silent. The ``assumeno`` option (or
+    ``--assumeno``) takes precedence: the key details are shown and the import is declined, as if
+    this option were not set. Only enable this for repositories whose ``gpgkey`` you control and
+    trust, and that are retrieved over a trusted channel, because doing so removes the manual
+    confirmation step for that repository's metadata key.
 
 .. _retries-label:
 
